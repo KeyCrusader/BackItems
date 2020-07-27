@@ -91,6 +91,9 @@ public class BackpackItem extends Item implements IDyeableArmorItem, IDyeableIte
         INBT inventoryTag = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().writeNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, handlerBackpack, null);
 
         CompoundNBT itemTag = super.getShareTag(stack);
+        if (itemTag == null) {
+            itemTag = new CompoundNBT();
+        }
 
         itemTag.put("backpackInventory", inventoryTag);
 

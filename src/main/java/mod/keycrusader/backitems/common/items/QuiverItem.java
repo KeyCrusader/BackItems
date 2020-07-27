@@ -1,12 +1,8 @@
 package mod.keycrusader.backitems.common.items;
 
-import mod.keycrusader.backitems.BackItems;
 import mod.keycrusader.backitems.common.capability.CurioQuiver;
 import mod.keycrusader.backitems.common.capability.InventoryQuiver;
 import mod.keycrusader.backitems.common.util.Helpers;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
@@ -18,13 +14,11 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import top.theillusivec4.curios.api.capability.CuriosCapability;
 import top.theillusivec4.curios.api.capability.ICurio;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Map;
 
 public class QuiverItem extends Item implements IDyeableArmorItem, IDyeableItem {
     public QuiverItem() {
@@ -96,6 +90,9 @@ public class QuiverItem extends Item implements IDyeableArmorItem, IDyeableItem 
         INBT inventoryTag = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().writeNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, handlerQuiver, null);
 
         CompoundNBT itemTag = super.getShareTag(stack);
+        if (itemTag == null) {
+            itemTag = new CompoundNBT();
+        }
 
         itemTag.put("quiverInventory", inventoryTag);
 

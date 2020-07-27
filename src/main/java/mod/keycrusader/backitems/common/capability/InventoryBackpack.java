@@ -17,6 +17,6 @@ public class InventoryBackpack extends ItemStackHandler {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-        return !(stack.getItem() instanceof QuiverItem && stack.getItem() instanceof BackpackItem && Block.getBlockFromItem(stack.getItem()) instanceof ShulkerBoxBlock);
+        return !(stack.getItem() instanceof QuiverItem || stack.getItem() instanceof BackpackItem || Block.getBlockFromItem(stack.getItem()) instanceof ShulkerBoxBlock);
     }
 }

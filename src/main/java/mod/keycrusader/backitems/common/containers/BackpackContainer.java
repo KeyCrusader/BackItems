@@ -44,7 +44,7 @@ public class BackpackContainer extends Container {
                     // Disable backpack nesting
                     @Override
                     public boolean isItemValid(@Nonnull ItemStack stack) {
-                        return (!(stack.getItem() instanceof BackpackItem));
+                        return (inventoryBackpack.isItemValid(slotIndex, stack));
                     }
                 });
             }

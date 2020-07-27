@@ -40,7 +40,7 @@ public class QuiverContainer extends Container {
                 // Only allow arrows
                 @Override
                 public boolean isItemValid(@Nonnull ItemStack stack) {
-                    return stack.getItem() instanceof ArrowItem;
+                    return inventoryQuiver.isItemValid(slotIndex, stack);
                 }
             });
         }
