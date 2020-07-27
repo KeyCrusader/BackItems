@@ -6,6 +6,7 @@ import mod.keycrusader.backitems.BackItems;
 import mod.keycrusader.backitems.client.screens.BackpackScreen;
 import mod.keycrusader.backitems.client.screens.QuiverOverlayScreen;
 import mod.keycrusader.backitems.client.screens.QuiverScreen;
+import mod.keycrusader.backitems.client.screens.StatusOverlayScreen;
 import mod.keycrusader.backitems.client.util.KeybindHandler;
 import mod.keycrusader.backitems.common.items.QuiverItem;
 import mod.keycrusader.backitems.common.network.client.COpenGui;
@@ -42,7 +43,7 @@ import java.lang.reflect.Method;
 @Mod.EventBusSubscriber(modid = BackItems.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventHandler {
     private static final QuiverOverlayScreen QUIVER_OVERLAY_SCREEN = new QuiverOverlayScreen();
-    private static final Method setPose = ObfuscationReflectionHelper.findMethod(Entity.class, "func_213301_b", Pose.class);
+    private static final StatusOverlayScreen STATUS_OVERLAY_SCREEN = new StatusOverlayScreen();
 
     @SubscribeEvent
     public static void onKeyPressed(InputEvent.KeyInputEvent event) {
@@ -81,6 +82,9 @@ public class ForgeEventHandler {
     public static void onRenderGameOverlayPost(RenderGameOverlayEvent.Post event) {
         if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
             PlayerEntity player = (PlayerEntity) Minecraft.getInstance().getRenderViewEntity();
+
+            STATUS_OVERLAY_SCREEN.render();
+
             if (Helpers.getBackItem(player).getItem() instanceof QuiverItem) {
                 QUIVER_OVERLAY_SCREEN.render();
             }
