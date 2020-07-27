@@ -1,0 +1,46 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "backitems:models/backpack",
+		"1": "backitems:models/backpack_overlay",
+		"particle": "backitems:models/backpack"
+	},
+	"elements": [
+		{
+			"name": "sleeping_bag",
+			"from": [-4, -13, 4],
+			"to": [4, -10, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, -5, 12]},
+			"faces": {
+				"north": {"uv": [7.5, 4.5, 11.5, 6], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [14, 1.5, 15.5, 3], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [11.5, 4.5, 15.5, 6], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [12.5, 1.5, 14, 3], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [7.5, 3, 11.5, 4.5], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [11.5, 3, 15.5, 4.5], "texture": "#0", "tintindex": 0}
+			}
+		},
+		{
+			"name": "sleeping_bag_overlay",
+			"from": [-4, -13, 4],
+			"to": [4, -10, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, -5, 12]},
+			"faces": {
+				"north": {"uv": [7.5, 4.5, 11.5, 6], "texture": "#1"},
+				"east": {"uv": [14, 1.5, 15.5, 3], "texture": "#1"},
+				"south": {"uv": [11.5, 4.5, 15.5, 6], "texture": "#1"},
+				"west": {"uv": [12.5, 1.5, 14, 3], "texture": "#1"},
+				"up": {"uv": [7.5, 3, 11.5, 4.5], "texture": "#1"},
+				"down": {"uv": [11.5, 3, 15.5, 4.5], "texture": "#1"}
+			}
+		}
+	],
+	"display": {
+		"head": {
+			"translation": [0, -29, 0],
+			"scale": [1.6, 1.6, 1.6]
+		}
+	}
+}

@@ -1,0 +1,15 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "backitems:items/quiver",
+    "layer1": "backitems:items/quiver_overlay"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "has_items": 1
+      },
+      "model": "backitems:item/quiver_locked"
+    }
+  ]
+}

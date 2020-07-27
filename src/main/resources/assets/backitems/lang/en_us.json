@@ -1,0 +1,16 @@
+{
+  "item.backitems.backpack":"Backpack",
+  "item.backitems.quiver":"Quiver",
+  "item.backitems.parachute":"Parachute",
+
+  "enchantment.backitems.storage": "Storage",
+  "enchantment.backitems.conservation": "Conservation",
+  "enchantment.backitems.quickdraw": "Quickdraw",
+  "enchantment.backitems.perpetual": "Perpetual",
+
+  "key.backitems.open": "Open",
+  "key.backitems.action": "Action",
+  "categories.backitems.backitems": "Back Items",
+
+  "screen.backitems.overlay": "Quiver Overlay"
+}

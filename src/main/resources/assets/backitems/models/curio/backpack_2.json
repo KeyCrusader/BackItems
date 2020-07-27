@@ -1,0 +1,44 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "backitems:models/backpack",
+		"1": "backitems:models/backpack_overlay",
+		"particle": "backitems:models/backpack"
+	},
+	"elements": [
+		{
+			"name": "pouch_front",
+			"from": [-2.5, -9, 6],
+			"to": [2.5, -5, 7.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5.5, -1, 14]},
+			"faces": {
+				"east": {"uv": [11, 1, 11.75, 3], "texture": "#0", "tintindex": 0},
+				"south": {"uv": [8.5, 1, 11, 3], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [7.75, 1, 8.5, 3], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [7.5, 0.25, 10, 1], "texture": "#0", "tintindex": 0},
+				"down": {"uv": [10, 0.25, 12.5, 1], "texture": "#0", "tintindex": 0}
+			}
+		},
+		{
+			"name": "pouch_front_overlay",
+			"from": [-2.5, -9, 6],
+			"to": [2.5, -5, 7.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5.5, -1, 14]},
+			"faces": {
+				"east": {"uv": [11, 1, 11.75, 3], "texture": "#1"},
+				"south": {"uv": [8.5, 1, 11, 3], "texture": "#1"},
+				"west": {"uv": [7.75, 1, 8.5, 3], "texture": "#1", "tintindex": 0},
+				"up": {"uv": [7.5, 0.25, 10, 1], "texture": "#1"},
+				"down": {"uv": [10, 0.25, 12.5, 1], "texture": "#1"}
+			}
+		}
+	],
+	"display": {
+		"head": {
+			"translation": [0, -29, 0],
+			"scale": [1.6, 1.6, 1.6]
+		}
+	}
+}

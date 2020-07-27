@@ -1,0 +1,8 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "backitems:items/quiver",
+    "layer1": "backitems:items/quiver_overlay",
+    "layer2": "backitems:items/lock"
+  }
+}
