@@ -2,6 +2,7 @@ package mod.keycrusader.backitems.client.util;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import mod.keycrusader.backitems.common.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -15,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -61,7 +63,7 @@ public class RenderHandler {
     public static void alignToBack(MatrixStack matrixStack, LivingEntity livingEntity) {
         matrixStack.rotate(Vector3f.ZP.rotationDegrees(180.0F));
 
-        if (livingEntity.isSneaking() && !(((PlayerEntity) livingEntity).abilities.isFlying)) {
+        if (livingEntity.isSneaking() && !(((PlayerEntity) livingEntity).abilities.isFlying) && !Helpers.isUsingParachute(livingEntity)) {
             matrixStack.translate(0F, -0.2F, 0F);
             matrixStack.rotate(Vector3f.XP.rotationDegrees(-28.647888F));
         }

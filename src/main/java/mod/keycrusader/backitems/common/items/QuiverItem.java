@@ -1,5 +1,6 @@
 package mod.keycrusader.backitems.common.items;
 
+import mod.keycrusader.backitems.BackItems;
 import mod.keycrusader.backitems.common.capability.CurioQuiver;
 import mod.keycrusader.backitems.common.capability.InventoryQuiver;
 import mod.keycrusader.backitems.common.util.Helpers;
@@ -36,7 +37,7 @@ public class QuiverItem extends Item implements IDyeableArmorItem, IDyeableItem 
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
         return new ICapabilitySerializable<INBT>() {
             private final ICurio curio = new CurioQuiver(stack);
-            private final IItemHandler inventory = new InventoryQuiver();
+            private final IItemHandler inventory = new InventoryQuiver(stack);
 
             private final LazyOptional<ICurio> curioCapability = LazyOptional.of(() -> curio);
             private final LazyOptional<IItemHandler> inventoryCapability = LazyOptional.of(() -> inventory);
@@ -96,6 +97,10 @@ public class QuiverItem extends Item implements IDyeableArmorItem, IDyeableItem 
 
         itemTag.put("quiverInventory", inventoryTag);
 
+        if (stack.getTag() != null && stack.getTag().contains("sync")) {
+            stack.getTag().remove("sync");
+        }
+
         return itemTag;
     }
 
@@ -110,6 +115,10 @@ public class QuiverItem extends Item implements IDyeableArmorItem, IDyeableItem 
             }
 
             tag.remove("quiverInventory");
+        }
+
+        if (stack.getTag() != null && stack.getTag().contains("sync")) {
+            stack.getTag().remove("sync");
         }
 
         super.readShareTag(stack, tag);

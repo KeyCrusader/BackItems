@@ -8,7 +8,6 @@ import mod.keycrusader.backitems.common.network.server.SUsingQuiverPacket;
 import mod.keycrusader.backitems.common.network.server.SUsingParachutePacket;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
