@@ -2,13 +2,8 @@ package mod.keycrusader.backitems.client.events;
 
 import mod.keycrusader.backitems.BackItems;
 import mod.keycrusader.backitems.client.util.InitHandler;
-import mod.keycrusader.backitems.common.items.BackpackItem;
-import mod.keycrusader.backitems.common.items.QuiverItem;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
@@ -27,7 +22,6 @@ public class ModEventHandler {
             InitHandler.initKeybindings();
         });
     }
-
 
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {

@@ -2,6 +2,7 @@ package mod.keycrusader.backitems.common.items;
 
 import mod.keycrusader.backitems.BackItems;
 import mod.keycrusader.backitems.common.capability.CurioGlider;
+import mod.keycrusader.backitems.common.util.Helpers;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
@@ -21,17 +22,19 @@ public class GliderItem extends Item implements IDyeableArmorItem, IDyeableItem 
                 .group(ItemGroup.TRANSPORTATION)
                 .maxStackSize(1)
                 .rarity(Rarity.COMMON)
-                .maxDamage(20)
         );
+        addPropertyOverride(new ResourceLocation("broken"), (stack, world, entity) -> isUsable(stack) ? 0 : 1);
     }
 
     public static boolean isUsable(ItemStack stack) {
-        return stack.getDamage() < stack.getMaxDamage() - 1;
+        if (stack.hasTag()) {
+            return stack.getTag().contains("usable") ? stack.getTag().getBoolean("broken") : true;
+        }
+        return true;
     }
 
-    @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return repair.getItem() == Items.LEATHER;
+    public static void setUsable(ItemStack stack, boolean usable) {
+        stack.getOrCreateTag().putBoolean("usable", usable);
     }
 
     @Nullable

@@ -7,6 +7,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ElytraItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -30,7 +31,8 @@ public class CUsingParachutePacket {
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
             PlayerEntity playerEntity = ctx.get().getSender();
-            if (Helpers.getBackItem(playerEntity).getItem() instanceof ParachuteItem) {
+            ItemStack stackBack = Helpers.getBackItem(playerEntity);
+            if (stackBack.getItem() instanceof ParachuteItem) {
                 if (Helpers.isUsingParachute(playerEntity)) {
                     Helpers.setUsingParachute(ctx.get().getSender(), false);
                 }

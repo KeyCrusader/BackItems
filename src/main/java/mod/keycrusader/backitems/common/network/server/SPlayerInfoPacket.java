@@ -33,8 +33,9 @@ public class SPlayerInfoPacket {
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            Helpers.setArrowSelectedIndex((LivingEntity) Minecraft.getInstance().world.getEntityByID(this.entityID), this.quiver);
-            Helpers.setUsingParachute((LivingEntity) Minecraft.getInstance().world.getEntityByID(this.entityID), this.parachute);
+            LivingEntity livingEntity = (LivingEntity) Minecraft.getInstance().world.getEntityByID(this.entityID);
+            Helpers.setArrowSelectedIndex(livingEntity, this.quiver);
+            Helpers.setUsingParachute(livingEntity, this.parachute);
         });
         ctx.get().setPacketHandled(true);
     }

@@ -36,14 +36,12 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.event.entity.player.ArrowLooseEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerFlyableFallEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.PacketDistributor;
@@ -294,6 +292,21 @@ public class ForgeEventHandler {
                 playerEntity.fallDistance -= 0.1F;
             }
             playerEntity.setMotion(playerEntity.getMotion().x, motionY, playerEntity.getMotion().z);
+        }
+    }
+
+    // Repair glider event
+    @SubscribeEvent
+    public static void onAnvilUsed(AnvilUpdateEvent event) {
+        if (event.getLeft().hasTag() && event.getLeft().getTag().contains("usable")) {
+            ItemStack output = event.getLeft().copy();
+            if (output.getTag().getBoolean("usable") == false && event.getRight().getItem() == Items.LEATHER) {
+                output.getTag().remove("usable");
+
+                event.setCost(1);
+                event.setMaterialCost(1);
+                event.setOutput(output);
+            }
         }
     }
 }

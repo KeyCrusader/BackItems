@@ -46,5 +46,6 @@ public class RegistryHandler {
     public static final RegistryObject<Enchantment> STORAGE_ENCHANTMENT = ENCHANTMENTS.register("storage", StorageEnchantment::new);
     public static final RegistryObject<Enchantment> CONSERVATION_ENCHANTMENT = ENCHANTMENTS.register("conservation", ConservationEnchantment::new);
     public static final RegistryObject<Enchantment> PERPETUAL_ENCHANTMENT = ENCHANTMENTS.register("perpetual", PerpetualEnchantment::new);
-    public static final RegistryObject<Enchantment> QUICKDRAW_ENCHANTMENT = ENCHANTMENTS.register("quickdraw", QuickdrawEnchantment::new);
+    // TODO Decide if this should exist
+    //public static final RegistryObject<Enchantment> QUICKDRAW_ENCHANTMENT = ENCHANTMENTS.register("quickdraw", QuickdrawEnchantment::new);
 }

@@ -121,6 +121,7 @@ public class Helpers {
             // Update client if this is the server
             if (!livingEntity.world.isRemote) {
                 PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) livingEntity), new SUsingParachutePacket(livingEntity, using));
+                PacketHandler.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> livingEntity), new SUsingParachutePacket(livingEntity, using));
             }
         }
     }

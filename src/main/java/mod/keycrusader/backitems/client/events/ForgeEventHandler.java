@@ -1,7 +1,5 @@
 package mod.keycrusader.backitems.client.events;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 import mod.keycrusader.backitems.BackItems;
 import mod.keycrusader.backitems.client.screens.BackpackScreen;
 import mod.keycrusader.backitems.client.screens.QuiverOverlayScreen;
@@ -14,31 +12,15 @@ import mod.keycrusader.backitems.common.network.client.CUsingParachutePacket;
 import mod.keycrusader.backitems.common.util.Helpers;
 import mod.keycrusader.backitems.common.util.PacketHandler;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
-import net.minecraft.client.renderer.Atlases;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.PlayerRenderer;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.entity.model.PlayerModel;
-import net.minecraft.client.renderer.model.Material;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.Pose;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerFlyableFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import org.lwjgl.glfw.GLFW;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 @Mod.EventBusSubscriber(modid = BackItems.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventHandler {
@@ -89,25 +71,5 @@ public class ForgeEventHandler {
                 QUIVER_OVERLAY_SCREEN.render();
             }
         }
-    }
-
-    @SubscribeEvent
-    public static void onPlayerRender(RenderPlayerEvent.Pre event) {
-        try {
-            if (Helpers.isUsingParachute(event.getPlayer())) {
-                event.setCanceled(true);
-
-                event.getMatrixStack().push();
-                event.getRenderer().getEntityModel().render(event.getMatrixStack(), event.getBuffers().getBuffer(RenderType.getCutout()), event.getLight(), OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
-                event.getMatrixStack().pop();
-
-            }
-        } catch (Exception e) {
-            BackItems.LOGGER.error("Error setting player sitting", e);
-        }
-    }
-
-    protected static float degToRad(float deg) {
-        return (float) (deg * (Math.PI/180));
     }
 }

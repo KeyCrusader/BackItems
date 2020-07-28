@@ -29,7 +29,8 @@ public class SUsingParachutePacket {
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            Helpers.setUsingParachute((LivingEntity) Minecraft.getInstance().world.getEntityByID(this.entityID), this.value);
+            LivingEntity livingEntity = (LivingEntity) Minecraft.getInstance().world.getEntityByID(this.entityID);
+            Helpers.setUsingParachute(livingEntity, this.value);
         });
         ctx.get().setPacketHandled(true);
     }

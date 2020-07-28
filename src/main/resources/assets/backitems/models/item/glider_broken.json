@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "backitems:items/glider_broken",
+    "layer1": "backitems:items/glider_broken_overlay"
+  }
+}

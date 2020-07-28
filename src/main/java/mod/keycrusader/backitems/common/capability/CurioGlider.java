@@ -1,6 +1,7 @@
 package mod.keycrusader.backitems.common.capability;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import mod.keycrusader.backitems.BackItems;
 import mod.keycrusader.backitems.client.util.ModelHandler;
 import mod.keycrusader.backitems.client.util.RenderHandler;
 import mod.keycrusader.backitems.common.items.GliderItem;
@@ -36,17 +37,34 @@ public class CurioGlider implements ICurio {
     }
 
     @Override
-    public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
-        if (livingEntity.world.isRemote || !GliderItem.isUsable(stack)) {
+    public void onCurioTick(String identifier, int index, LivingEntity entityLivingBase) {
+        if (entityLivingBase.world.isRemote) {
             return;
         }
 
-        Integer ticksFlying = ObfuscationReflectionHelper
-                .getPrivateValue(LivingEntity.class, livingEntity, "field_184629_bo");
+        if (entityLivingBase.isElytraFlying() || GliderItem.isUsable(stack)) {
+            Integer ticksFlying = ObfuscationReflectionHelper.getPrivateValue(LivingEntity.class, entityLivingBase, "field_184629_bo");
 
-        if (ticksFlying != null && (ticksFlying + 1) % 20 == 0) {
-            stack.damageItem(1, livingEntity,
-                    entity -> entity.sendBreakAnimation(EquipmentSlotType.CHEST));
+            if (ticksFlying != null && (ticksFlying + 1) % 20 == 0) {
+                if (GliderItem.isUsable(stack)) {
+                    GliderItem.setUsable(stack, false);
+                }
+            }
+        }
+        else {
+            setElytraFlight(entityLivingBase, false);
+        }
+    }
+
+    private void setElytraFlight(LivingEntity entityLivingBase, boolean canFly) {
+        IAttributeInstance attributeInstance = entityLivingBase.getAttribute(CaelusAPI.ELYTRA_FLIGHT);
+        boolean hasModifier = attributeInstance.hasModifier(ELYTRA_CURIO_MODIFIER);
+
+        if (canFly && !hasModifier && GliderItem.isUsable(stack)) {
+            attributeInstance.applyModifier(ELYTRA_CURIO_MODIFIER);
+        }
+        else if (!canFly && hasModifier) {
+            entityLivingBase.getAttribute(CaelusAPI.ELYTRA_FLIGHT).removeModifier(ELYTRA_CURIO_MODIFIER);
         }
     }
 
@@ -59,16 +77,12 @@ public class CurioGlider implements ICurio {
 
     @Override
     public void onEquipped(String identifier, LivingEntity entityLivingBase) {
-        IAttributeInstance attributeInstance = entityLivingBase.getAttribute(CaelusAPI.ELYTRA_FLIGHT);
-
-        if (!attributeInstance.hasModifier(ELYTRA_CURIO_MODIFIER) && GliderItem.isUsable(stack)) {
-            attributeInstance.applyModifier(ELYTRA_CURIO_MODIFIER);
-        }
+        setElytraFlight(entityLivingBase, true);
     }
 
     @Override
     public void onUnequipped(String identifier, LivingEntity entityLivingBase) {
-        entityLivingBase.getAttribute(CaelusAPI.ELYTRA_FLIGHT).removeModifier(ELYTRA_CURIO_MODIFIER);
+        setElytraFlight(entityLivingBase, false);
     }
 
     @Override

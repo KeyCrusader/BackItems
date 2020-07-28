@@ -1,19 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SSL",
-    "SL ",
-    "L  "
+    "LLL",
+    "L L",
+    "LLL"
   ],
   "key": {
     "L": {
       "item": "minecraft:leather"
-    },
-    "S": {
-      "item": "minecraft:string"
     }
   },
   "result": {
-    "item": "backslot:quiver"
+    "item": "backitems:backpack"
   }
 }
