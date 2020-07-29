@@ -17,6 +17,16 @@ While falling (more than 3 blocks) press jump again to open your equipped parach
 #### Glider
 Using the [Caelus API](https://minecraft.curseforge.com/projects/caelus), adds a single use glider that functions the same as elytra and can be repaired at and anvil with leather.
 
+## Features
+* Everything dyeable!
+* Looks different depending on level
+* Can't unequip if has items inside
+* Overlay to show parachuting/flying/falling
+
+## Controls
+* B - Open equipped backpack/quiver
+* R - Change selected arrow in quiver
+
 ## Crafting
 ![Crafting](https://i.imgur.com/nqHF6n3.png)
 
