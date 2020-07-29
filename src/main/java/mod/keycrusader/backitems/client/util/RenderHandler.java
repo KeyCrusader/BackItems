@@ -60,15 +60,15 @@ public class RenderHandler {
         }
     }
 
-    public static void alignToBack(MatrixStack matrixStack, LivingEntity livingEntity) {
+    public static void alignToBack(MatrixStack matrixStack, PlayerEntity playerEntity) {
         matrixStack.rotate(Vector3f.ZP.rotationDegrees(180.0F));
 
-        if (livingEntity.isSneaking() && !(((PlayerEntity) livingEntity).abilities.isFlying) && !Helpers.isUsingParachute(livingEntity)) {
+        if (playerEntity.isSneaking() && !(playerEntity.abilities.isFlying) && !Helpers.isUsingParachute(playerEntity)) {
             matrixStack.translate(0F, -0.2F, 0F);
             matrixStack.rotate(Vector3f.XP.rotationDegrees(-28.647888F));
         }
         // If the entity is wearing chest armour, offset the models by 1.0F (overlap size) * scale
-        if (!livingEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).isEmpty()) {
+        if (!playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).isEmpty()) {
             matrixStack.translate(0.0F, 0.0F, 0.0625F);
         }
     }

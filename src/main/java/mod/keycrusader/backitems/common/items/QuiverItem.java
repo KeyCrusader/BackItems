@@ -67,7 +67,7 @@ public class QuiverItem extends Item implements IDyeableArmorItem, IDyeableItem 
     }
 
     public int checkArrowCount(ItemStack stack) {
-        IItemHandler inventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
+        IItemHandler inventory = Helpers.getBackInventory(stack);
 
         int arrowCount = 0;
         for (int slot = 0; slot < inventory.getSlots(); slot++)
@@ -87,30 +87,32 @@ public class QuiverItem extends Item implements IDyeableArmorItem, IDyeableItem 
     @Nullable
     @Override
     public CompoundNBT getShareTag(ItemStack stack) {
-        IItemHandler handlerQuiver = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
+        IItemHandler handlerQuiver = Helpers.getBackInventory(stack);
         INBT inventoryTag = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().writeNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, handlerQuiver, null);
 
         CompoundNBT itemTag = super.getShareTag(stack);
-        if (itemTag == null) {
-            itemTag = new CompoundNBT();
+
+        if (inventoryTag != null) {
+            if (itemTag == null) {
+                itemTag = new CompoundNBT();
+            }
+
+            itemTag.put("quiverInventory", inventoryTag);
+
+            if (stack.getTag() != null && stack.getTag().contains("sync")) {
+                stack.getTag().remove("sync");
+            }
         }
-
-        itemTag.put("quiverInventory", inventoryTag);
-
-        if (stack.getTag() != null && stack.getTag().contains("sync")) {
-            stack.getTag().remove("sync");
-        }
-
         return itemTag;
     }
 
     @Override
     public void readShareTag(ItemStack stack, @Nullable CompoundNBT tag) {
-        if (tag.contains("quiverInventory")) {
+        if (tag != null && tag.contains("quiverInventory")) {
             INBT inventoryTag = tag.get("quiverInventory");
 
             if (inventoryTag != null) {
-                IItemHandler handlerQuiver = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
+                IItemHandler handlerQuiver = Helpers.getBackInventory(stack);
                 CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().readNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, handlerQuiver, null, inventoryTag);
             }
 

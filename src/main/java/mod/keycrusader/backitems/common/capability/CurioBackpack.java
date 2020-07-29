@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IDyeableArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
@@ -44,9 +45,12 @@ public class CurioBackpack implements ICurio {
 
     @Override
     public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+        if (!(livingEntity instanceof PlayerEntity)) return;
+        PlayerEntity playerEntity = (PlayerEntity) livingEntity;
+
         matrixStack.push();
 
-        RenderHandler.alignToBack(matrixStack, livingEntity);
+        RenderHandler.alignToBack(matrixStack, playerEntity);
         int colour = ((IDyeableArmorItem) this.stack.getItem()).getColor(this.stack);
 
         int level = EnchantmentHelper.getEnchantmentLevel(RegistryHandler.STORAGE_ENCHANTMENT.get(), this.stack);

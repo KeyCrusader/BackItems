@@ -5,14 +5,12 @@ import mod.keycrusader.backitems.common.containers.BackpackContainer;
 import mod.keycrusader.backitems.common.containers.QuiverContainer;
 import mod.keycrusader.backitems.common.enchantments.ConservationEnchantment;
 import mod.keycrusader.backitems.common.enchantments.PerpetualEnchantment;
-import mod.keycrusader.backitems.common.enchantments.QuickdrawEnchantment;
 import mod.keycrusader.backitems.common.enchantments.StorageEnchantment;
 import mod.keycrusader.backitems.common.items.BackpackItem;
 import mod.keycrusader.backitems.common.items.GliderItem;
 import mod.keycrusader.backitems.common.items.ParachuteItem;
 import mod.keycrusader.backitems.common.items.QuiverItem;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.extensions.IForgeContainerType;
@@ -46,6 +44,4 @@ public class RegistryHandler {
     public static final RegistryObject<Enchantment> STORAGE_ENCHANTMENT = ENCHANTMENTS.register("storage", StorageEnchantment::new);
     public static final RegistryObject<Enchantment> CONSERVATION_ENCHANTMENT = ENCHANTMENTS.register("conservation", ConservationEnchantment::new);
     public static final RegistryObject<Enchantment> PERPETUAL_ENCHANTMENT = ENCHANTMENTS.register("perpetual", PerpetualEnchantment::new);
-    // TODO Decide if this should exist
-    //public static final RegistryObject<Enchantment> QUICKDRAW_ENCHANTMENT = ENCHANTMENTS.register("quickdraw", QuickdrawEnchantment::new);
 }

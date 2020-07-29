@@ -1,8 +1,10 @@
 package mod.keycrusader.backitems.common.containers;
 
+import mcp.MethodsReturnNonnullByDefault;
 import mod.keycrusader.backitems.BackItems;
 import mod.keycrusader.backitems.common.items.BackpackItem;
 import mod.keycrusader.backitems.common.items.QuiverItem;
+import mod.keycrusader.backitems.common.util.Helpers;
 import mod.keycrusader.backitems.common.util.RegistryHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,6 +19,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
 
@@ -24,7 +27,7 @@ public class QuiverContainer extends Container {
     public QuiverContainer(int windowId, PlayerInventory inventoryPlayer, ItemStack stackQuiver) {
         super(RegistryHandler.QUIVER_CONTAINER.get(), windowId);
 
-        IItemHandler inventoryQuiver = stackQuiver.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
+        IItemHandler inventoryQuiver = Helpers.getBackInventory(stackQuiver);
 
         int offsetX = 8;
         int offsetY = 20;

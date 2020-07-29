@@ -119,6 +119,7 @@ public class ForgeEventHandler {
     @SubscribeEvent
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event)
     {
+        BackItems.LOGGER.info("Player logged in event");
         if (event.getPlayer().world.isRemote) return;
         sendPlayerInfo(event.getPlayer(), event.getPlayer());
     }
@@ -143,7 +144,7 @@ public class ForgeEventHandler {
     private static void sendPlayerInfo(Entity carrier, PlayerEntity player)
     {
         if (carrier instanceof PlayerEntity) {
-            PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new SPlayerInfoPacket((LivingEntity) carrier, Helpers.getArrowSelectedIndex((LivingEntity) carrier), Helpers.isUsingParachute((LivingEntity) carrier)));
+            PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new SPlayerInfoPacket((LivingEntity) carrier, Helpers.getArrowSelectedIndex((PlayerEntity) carrier), Helpers.isUsingParachute((PlayerEntity) carrier)));
         }
     }
 
@@ -200,7 +201,7 @@ public class ForgeEventHandler {
     public static void onSlotChanged(LivingEquipmentChangeEvent event) {
         if (!(event.getEntityLiving() instanceof PlayerEntity)) return;
 
-        EquipmentSlotType changedSlot = Helpers.isArrowFromQuiver(event.getEntityLiving());
+        EquipmentSlotType changedSlot = Helpers.isArrowFromQuiver((PlayerEntity) event.getEntityLiving());
 
         if (changedSlot == null) return;
         else if (changedSlot == event.getSlot()) return;
@@ -277,7 +278,7 @@ public class ForgeEventHandler {
         PlayerEntity playerEntity = (PlayerEntity) event.getEntityLiving();
 
         if (Helpers.getBackItem(playerEntity).getItem() instanceof ParachuteItem && Helpers.isUsingParachute(playerEntity)) {
-            if (playerEntity.isOnLadder() || playerEntity.isOnePlayerRiding() || playerEntity.isElytraFlying() || playerEntity.abilities.isFlying) {
+            if (playerEntity.isOnLadder() || playerEntity.isOnePlayerRiding() || playerEntity.isElytraFlying() || playerEntity.abilities.isFlying || playerEntity.isInWater()) {
                 Helpers.setUsingParachute(playerEntity, false);
                 return;
             }
@@ -300,7 +301,7 @@ public class ForgeEventHandler {
     public static void onAnvilUsed(AnvilUpdateEvent event) {
         if (event.getLeft().hasTag() && event.getLeft().getTag().contains("usable")) {
             ItemStack output = event.getLeft().copy();
-            if (output.getTag().getBoolean("usable") == false && event.getRight().getItem() == Items.LEATHER) {
+            if (!output.getTag().getBoolean("usable") && event.getRight().getItem() == Items.LEATHER) {
                 output.getTag().remove("usable");
 
                 event.setCost(1);

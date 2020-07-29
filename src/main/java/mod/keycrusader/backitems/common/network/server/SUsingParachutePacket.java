@@ -3,6 +3,7 @@ package mod.keycrusader.backitems.common.network.server;
 import mod.keycrusader.backitems.common.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -29,8 +30,9 @@ public class SUsingParachutePacket {
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            LivingEntity livingEntity = (LivingEntity) Minecraft.getInstance().world.getEntityByID(this.entityID);
-            Helpers.setUsingParachute(livingEntity, this.value);
+            PlayerEntity playerEntity = (PlayerEntity) Minecraft.getInstance().world.getEntityByID(this.entityID);
+            if (playerEntity == null) throw new IllegalArgumentException("Player not found");
+            Helpers.setUsingParachute(playerEntity, this.value);
         });
         ctx.get().setPacketHandled(true);
     }

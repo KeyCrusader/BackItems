@@ -4,6 +4,7 @@ import mod.keycrusader.backitems.BackItems;
 import mod.keycrusader.backitems.common.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -34,9 +35,11 @@ public class SPlayerInfoPacket {
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            LivingEntity livingEntity = (LivingEntity) Minecraft.getInstance().world.getEntityByID(this.entityID);
-            Helpers.setArrowSelectedIndex(livingEntity, this.quiver);
-            Helpers.setUsingParachute(livingEntity, this.parachute);
+            PlayerEntity playerEntity = (PlayerEntity) Minecraft.getInstance().world.getEntityByID(this.entityID);
+            if (playerEntity == null) throw new IllegalArgumentException("Player not found");
+
+            Helpers.setArrowSelectedIndex(playerEntity, this.quiver);
+            Helpers.setUsingParachute(playerEntity, this.parachute);
         });
         ctx.get().setPacketHandled(true);
     }

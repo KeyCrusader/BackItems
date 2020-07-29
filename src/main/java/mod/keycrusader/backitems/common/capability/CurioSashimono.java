@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.model.Material;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BannerItem;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
@@ -26,7 +27,7 @@ import java.util.List;
 import static net.minecraft.tileentity.BannerTileEntity.func_230138_a_;
 
 public class CurioSashimono implements ICurio {
-    private Object model;
+    private SashimonoModel model;
     private final double animationOffset = Math.random();
 
     /** Base colour of the banner (e.g. White, Black, Blue... */
@@ -85,12 +86,15 @@ public class CurioSashimono implements ICurio {
 
     @Override
     public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+        if (!(livingEntity instanceof PlayerEntity)) return;
+        PlayerEntity playerEntity = (PlayerEntity) livingEntity;
+
         if (this.model == null) {
             this.model = new SashimonoModel();
         }
 
         matrixStack.push();
-        RenderHandler.alignToBack(matrixStack, livingEntity);
+        RenderHandler.alignToBack(matrixStack, playerEntity);
 
         ItemStack stack = Helpers.getItem(livingEntity, identifier);
         if (!stack.equals(cachedBannerStack)) {
@@ -108,7 +112,7 @@ public class CurioSashimono implements ICurio {
             Pair<BannerPattern, DyeColor> pair = list.get(i);
             float[] afloat = pair.getSecond().getColorComponentValues();
             Material material = new Material(Atlases.BANNER_ATLAS, pair.getFirst().func_226957_a_(true));
-            ((SashimonoModel)this.model).render(matrixStack, material.getBuffer(renderTypeBuffer, RenderType::getEntityCutout), light, 0 | 10 << 16, afloat[0], afloat[1], afloat[2], 1.0F);
+            this.model.render(matrixStack, material.getBuffer(renderTypeBuffer, RenderType::getEntityCutout), light, 0 | 10 << 16, afloat[0], afloat[1], afloat[2], 1.0F);
         }
         matrixStack.pop();
 

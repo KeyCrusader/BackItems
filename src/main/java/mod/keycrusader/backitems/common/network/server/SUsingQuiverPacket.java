@@ -3,6 +3,7 @@ package mod.keycrusader.backitems.common.network.server;
 import mod.keycrusader.backitems.common.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
@@ -39,7 +40,10 @@ public class SUsingQuiverPacket {
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            Helpers.setArrowFromQuiver((LivingEntity) Minecraft.getInstance().world.getEntityByID(this.entityID), hand);
+            PlayerEntity playerEntity = (PlayerEntity) Minecraft.getInstance().world.getEntityByID(this.entityID);
+            if (playerEntity == null) throw new IllegalArgumentException("Player not found");
+
+            Helpers.setArrowFromQuiver(playerEntity, hand);
         });
         ctx.get().setPacketHandled(true);
     }

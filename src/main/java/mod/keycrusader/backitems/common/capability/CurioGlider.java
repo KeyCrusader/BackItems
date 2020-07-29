@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.IDyeableArmorItem;
@@ -104,9 +105,12 @@ public class CurioGlider implements ICurio {
 
     @Override
     public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+        if (!(livingEntity instanceof PlayerEntity)) return;
+        PlayerEntity playerEntity = (PlayerEntity) livingEntity;
+
         matrixStack.push();
         int colour = ((IDyeableArmorItem) this.stack.getItem()).getColor(this.stack);
-        RenderHandler.alignToBack(matrixStack, livingEntity);
+        RenderHandler.alignToBack(matrixStack, playerEntity);
         if (livingEntity.isElytraFlying()) {
             matrixStack.translate(-0.5F, -0.875F, -0.3125F);
 

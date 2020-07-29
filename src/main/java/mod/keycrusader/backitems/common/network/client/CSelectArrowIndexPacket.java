@@ -36,10 +36,8 @@ public class CSelectArrowIndexPacket {
         ctx.get().enqueueWork(() -> {
             ItemStack stack = Helpers.getBackItem(ctx.get().getSender());
 
-            if (stack.getItem() instanceof BackpackItem) {
-            }
-            else if (stack.getItem() instanceof QuiverItem) {
-                ctx.get().getSender().getCapability(CapabilityHandler.PLAYER_STATUS_CAPABILITY).orElse(null).setArrowSelectedIndex(this.index);
+            if (stack.getItem() instanceof QuiverItem) {
+                Helpers.setArrowSelectedIndex(ctx.get().getSender(), this.index);
             }
         });
         ctx.get().setPacketHandled(true);

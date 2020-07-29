@@ -1,7 +1,9 @@
 package mod.keycrusader.backitems.common.containers;
 
+import mcp.MethodsReturnNonnullByDefault;
 import mod.keycrusader.backitems.BackItems;
 import mod.keycrusader.backitems.common.items.BackpackItem;
+import mod.keycrusader.backitems.common.util.Helpers;
 import mod.keycrusader.backitems.common.util.RegistryHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,6 +18,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import top.theillusivec4.curios.api.CuriosAPI;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
 
@@ -25,7 +28,7 @@ public class BackpackContainer extends Container {
     public BackpackContainer(int windowId, PlayerInventory inventoryPlayer, ItemStack stackBackpack) {
         super(RegistryHandler.BACKPACK_CONTAINER.get(), windowId);
 
-        IItemHandler inventoryBackpack = stackBackpack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
+        IItemHandler inventoryBackpack = Helpers.getBackInventory(stackBackpack);
 
         this.rowCount = EnchantmentHelper.getEnchantmentLevel(RegistryHandler.STORAGE_ENCHANTMENT.get(), stackBackpack)+1;
         int offsetX = 8;

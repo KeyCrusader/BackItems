@@ -28,7 +28,7 @@ public class QuiverOverlayScreen extends AbstractGui {
     private final Minecraft mc = Minecraft.getInstance();
 
     public void render() {
-        Entity player = this.getRenderViewPlayer();
+        PlayerEntity player = this.getRenderViewPlayer();
         if (player != null) {
             RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
             RenderSystem.enableBlend();
@@ -41,13 +41,13 @@ public class QuiverOverlayScreen extends AbstractGui {
             // Multiple texture draws to use vanilla textures
             this.blit(scaledWidth - 51, 0, 0, 0, 101, 22);
             this.blit(scaledWidth + 50, 0, 0, 0, 1, 22);
-            this.blit(scaledWidth - 52 + (player.getCapability(CapabilityHandler.PLAYER_STATUS_CAPABILITY).orElse(null).getArrowSelectedIndex() * 20), 1, 0, 24, 24, 22);
+            this.blit(scaledWidth - 52 + (Helpers.getPlayerStatus(player).getArrowSelectedIndex() * 20), 1, 0, 24, 24, 22);
 
             RenderSystem.enableRescaleNormal();
             RenderHelper.enableStandardItemLighting();
             RenderSystem.defaultBlendFunc();
 
-            ItemStack backItem = Helpers.getBackItem((LivingEntity) player);
+            ItemStack backItem = Helpers.getBackItem(player);
             IItemHandler backItemInventory = Helpers.getBackInventory(backItem);
             for (int slot = 0; slot < backItemInventory.getSlots(); slot++) {
                 ItemStack item = backItemInventory.getStackInSlot(slot);

@@ -74,32 +74,33 @@ public class BackpackItem extends Item implements IDyeableArmorItem, IDyeableIte
     @Nullable
     @Override
     public CompoundNBT getShareTag(ItemStack stack) {
-        IItemHandler handlerBackpack = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
+        IItemHandler handlerBackpack = Helpers.getBackInventory(stack);
         INBT inventoryTag = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().writeNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, handlerBackpack, null);
 
         CompoundNBT itemTag = super.getShareTag(stack);
-        if (itemTag == null) {
-            itemTag = new CompoundNBT();
+
+        if (inventoryTag != null) {
+            if (itemTag == null) {
+                itemTag = new CompoundNBT();
+            }
+
+            itemTag.put("backpackInventory", inventoryTag);
         }
-
-        itemTag.put("backpackInventory", inventoryTag);
-
         return itemTag;
     }
 
     @Override
     public void readShareTag(ItemStack stack, @Nullable CompoundNBT tag) {
-        if (tag.contains("backpackInventory")) {
-            INBT inventoryTag = tag.get("backpackInventory");
+        if (tag != null && tag.contains("backpackInventory")) {
+                INBT inventoryTag = tag.get("backpackInventory");
 
-            if (inventoryTag != null) {
-                IItemHandler handlerBackpack = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
-                CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().readNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, handlerBackpack, null, inventoryTag);
+                if (inventoryTag != null) {
+                    IItemHandler handlerBackpack = Helpers.getBackInventory(stack);
+                    CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().readNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, handlerBackpack, null, inventoryTag);
+                }
+
+                tag.remove("backpackInventory");
             }
-
-            tag.remove("backpackInventory");
-        }
-
         super.readShareTag(stack, tag);
     }
 }

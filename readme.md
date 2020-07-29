@@ -18,3 +18,7 @@ While falling (more than 3 blocks) press jump again to open your equipped parach
 Using the [Caelus API](https://minecraft.curseforge.com/projects/caelus), adds a single use glider that functions the same as elytra and can be repaired at and anvil with leather.
 
 ##Crafting
+![Crafting](https://i.imgur.com/nqHF6n3.png)
+
+##Screenshots
+![Screenshots](https://i.imgur.com/QLmqZed.png)

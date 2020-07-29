@@ -6,6 +6,7 @@ import mod.keycrusader.backitems.client.util.RenderHandler;
 import mod.keycrusader.backitems.common.util.Helpers;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IDyeableArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
@@ -33,13 +34,19 @@ public class CurioParachute implements ICurio {
 
     @Override
     public boolean canUnequip(String identifier, LivingEntity livingEntity) {
-        return !Helpers.isUsingParachute(livingEntity);
+        if (!(livingEntity instanceof PlayerEntity)) return true;
+        PlayerEntity playerEntity = (PlayerEntity) livingEntity;
+
+        return !Helpers.isUsingParachute(playerEntity);
     }
 
     @Override
     public void onUnequipped(String identifier, LivingEntity livingEntity) {
-        if (!livingEntity.world.isRemote && Helpers.isUsingParachute(livingEntity)) {
-            Helpers.setUsingParachute(livingEntity, false);
+        if (!(livingEntity instanceof PlayerEntity)) return;
+        PlayerEntity playerEntity = (PlayerEntity) livingEntity;
+
+        if (!livingEntity.world.isRemote && Helpers.isUsingParachute(playerEntity)) {
+            Helpers.setUsingParachute(playerEntity, false);
         }
     }
 
@@ -50,12 +57,15 @@ public class CurioParachute implements ICurio {
 
     @Override
     public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+        if (!(livingEntity instanceof PlayerEntity)) return;
+        PlayerEntity playerEntity = (PlayerEntity) livingEntity;
+
         matrixStack.push();
 
-        RenderHandler.alignToBack(matrixStack, livingEntity);
+        RenderHandler.alignToBack(matrixStack, playerEntity);
         int colour = ((IDyeableArmorItem) this.stack.getItem()).getColor(this.stack);
 
-        if (Helpers.isUsingParachute(livingEntity)) {
+        if (Helpers.isUsingParachute(playerEntity)) {
             RenderHandler.renderColouredModel(ModelHandler.CHUTE.getModel(1).get(0), matrixStack, renderTypeBuffer, 16777215, light);
             RenderHandler.renderColouredModel(ModelHandler.CHUTE.getModel(1).get(1), matrixStack, renderTypeBuffer, colour, light);
         } else {
