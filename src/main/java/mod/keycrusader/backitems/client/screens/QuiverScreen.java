@@ -1,5 +1,6 @@
 package mod.keycrusader.backitems.client.screens;
 
+import mod.keycrusader.backitems.BackItems;
 import mod.keycrusader.backitems.common.containers.QuiverContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
@@ -10,7 +11,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class QuiverScreen extends ContainerScreen<QuiverContainer> {
-    private final ResourceLocation GUI = new ResourceLocation("textures/gui/container/hopper.png");
+    private final ResourceLocation GUI = new ResourceLocation(BackItems.MODID, "textures/gui/container/quiver.png");
 
     public QuiverScreen(QuiverContainer screenContainer, PlayerInventory inventoryPlayer, ITextComponent titleIn) {
         super(screenContainer, inventoryPlayer, titleIn);

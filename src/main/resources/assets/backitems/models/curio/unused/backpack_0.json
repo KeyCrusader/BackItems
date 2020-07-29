@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 16],
+	"textures": {
+		"0": "backitems:models/unused/backpack",
+		"particle": "backitems:models/unused/backpack"
+	},
+	"elements": [
+		{
+			"from": [-4, -10, 2],
+			"to": [4, -1, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, -2, 10]},
+			"faces": {
+				"east": {"uv": [7, 6, 10, 15], "texture": "#0"},
+				"south": {"uv": [3, 6, 7, 15], "texture": "#0"},
+				"west": {"uv": [0, 6, 3, 15], "texture": "#0"},
+				"up": {"uv": [0, 0, 4, 6], "texture": "#0"},
+				"down": {"uv": [4, 0, 8, 6], "texture": "#0"}
+			}
+		}
+	]
+}

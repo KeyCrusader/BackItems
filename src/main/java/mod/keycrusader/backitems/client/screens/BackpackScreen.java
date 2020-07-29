@@ -16,7 +16,7 @@ import top.theillusivec4.curios.api.CuriosAPI;
 
 @OnlyIn(Dist.CLIENT)
 public class BackpackScreen extends ContainerScreen<BackpackContainer> {
-    private final ResourceLocation GUI = new ResourceLocation("textures/gui/container/generic_54.png");
+    private final ResourceLocation GUI = new ResourceLocation(BackItems.MODID, "textures/gui/container/backpack.png");
     private int rowCount;
 
     public BackpackScreen(BackpackContainer screenContainer, PlayerInventory inventoryPlayer, ITextComponent titleIn) {

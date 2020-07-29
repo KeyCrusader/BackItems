@@ -15,6 +15,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import top.theillusivec4.curios.api.capability.ICurio;
 
+import javax.annotation.Nonnull;
+
 
 public class CurioBackpack implements ICurio {
     private final ItemStack stack;
