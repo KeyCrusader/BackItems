@@ -26,6 +26,7 @@ public class SPlayerInfoPacket {
     }
 
     public SPlayerInfoPacket(LivingEntity entity, int quiver, boolean parachute) {
+        BackItems.LOGGER.info("Send player info packet");
         this.entityID = entity.getEntityId();
         this.quiver = quiver;
         this.parachute = parachute;

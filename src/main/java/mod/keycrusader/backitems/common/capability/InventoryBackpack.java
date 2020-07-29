@@ -1,5 +1,6 @@
 package mod.keycrusader.backitems.common.capability;
 
+import mod.keycrusader.backitems.BackItems;
 import mod.keycrusader.backitems.common.items.BackpackItem;
 import mod.keycrusader.backitems.common.items.QuiverItem;
 import net.minecraft.block.Block;

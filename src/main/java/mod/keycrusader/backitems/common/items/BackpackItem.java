@@ -1,38 +1,25 @@
 package mod.keycrusader.backitems.common.items;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import mod.keycrusader.backitems.client.util.ModelHandler;
-import mod.keycrusader.backitems.client.util.RenderHandler;
+import mod.keycrusader.backitems.BackItems;
 import mod.keycrusader.backitems.common.capability.CurioBackpack;
 import mod.keycrusader.backitems.common.capability.InventoryBackpack;
 import mod.keycrusader.backitems.common.util.Helpers;
-import mod.keycrusader.backitems.common.util.RegistryHandler;
-import net.minecraft.block.Block;
-import net.minecraft.block.ShulkerBoxBlock;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.enchantment.BindingCurseEnchantment;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
-import net.minecraft.util.*;
+import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import top.theillusivec4.curios.api.capability.CuriosCapability;
 import top.theillusivec4.curios.api.capability.ICurio;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Map;
 
 public class BackpackItem extends Item implements IDyeableArmorItem, IDyeableItem {
     public BackpackItem() {
